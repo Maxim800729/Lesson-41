@@ -312,6 +312,206 @@ class Square implements Drawable {
     }
 }
 
+//        7. Работа с базой данных
+//Создайте интерфейс Database с методами:
+//
+//connect()
+//disconnect()
+//Реализуйте классы:
+//
+//MySQLDatabase
+//        PostgreSQLDatabase
+//Каждый класс должен выводить сообщения о подключении и отключении.
+
+interface Database {
+    void connect();
+
+    void disconnect();
+}
+
+class MySQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("MySQL подключено");
+    }
+
+    @Override
+    public void disconnect() {
+        System.out.println("MySQL отключено");
+    }
+}
+
+class PostgreSQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("PostgreSQL подключено");
+    }
+
+
+    @Override
+    public void disconnect() {
+        System.out.println("PostgreSQL отключено");
+    }
+
+}
+
+
+//8. Спортивные соревнования
+//Создайте интерфейс Athlete с методами:
+//
+//run()
+//jump()
+//Реализуйте классы:
+//
+//Runner
+//        Jumper
+//Каждый класс должен реализовать соответствующие методы.
+interface Athlete {
+    void run();
+
+    void jump();
+
+}
+
+class Runner implements Athlete {
+    @Override
+    public void run() {
+        System.out.println("Бегун бежит");
+    }
+
+    @Override
+    public void jump() {
+        System.out.println("Бегун не прыгает");
+    }
+
+}
+
+class Jumper implements Athlete {
+    @Override
+
+    public void jump() {
+        System.out.println("Прыгун прыгает");
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Прыгун не бегает");
+    }
+
+}
+
+//        9. Магазин
+//Создайте абстрактный класс Product с методами:
+//
+//getPrice()
+//getName()
+//Создайте классы Electronics и Clothing,
+// которые наследуют Product и реализуют методы.
+
+abstract class Product {
+    public abstract int getPrice();
+
+    public abstract String getName();
+}
+
+class Electronics extends Product {
+    private int price;
+    private String name;
+
+    public Electronics(int price, String name) {
+        this.price = price;
+        this.name = name;
+    }
+
+    @Override
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+}
+
+class Clothing extends Product {
+    private int price;
+    private String name;
+
+    public Clothing(int price, String name) {
+        this.price = price;
+        this.name = name;
+    }
+
+    @Override
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+}
+
+//        10. Зоопарк
+//Создайте абстрактный класс Animal с методами:
+//
+//eat()
+//sleep()
+//Добавьте интерфейс SoundMaker с методом makeSound(). Реализуйте классы:
+//
+//Lion
+//        Elephant
+//Каждое животное должно реализовать свои звуки, приемы пищи и сон.
+abstract class Animals {
+    public abstract String eat();
+
+    public abstract String sleep();
+}
+
+interface SoundMaker {
+    void makeSound();
+
+}
+
+class Lion extends Animals implements SoundMaker {
+    @Override
+    public String eat() {
+        return "Лев ест мясо";
+    }
+
+    @Override
+    public String sleep() {
+        return "Лев спит под деревом";
+    }
+
+    @Override
+
+    public void makeSound() {
+        System.out.println("Лев рычит");
+
+    }
+}
+
+class Elephant extends Animals implements SoundMaker {
+    @Override
+    public String eat() {
+        return "Слон ест траву";
+    }
+
+    @Override
+    public String sleep() {
+        return "Слон спит стоя";
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println("Слон трубит");
+
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
 
@@ -344,6 +544,34 @@ public class Main {
         Drawable square = new Square();
         circle2.draw();
         square.draw();
+        Database MySQLDatabase = new MySQLDatabase();
+        Database PostgreSQLDatabase = new PostgreSQLDatabase();
+        MySQLDatabase.connect();
+        MySQLDatabase.disconnect();
+        PostgreSQLDatabase.connect();
+        PostgreSQLDatabase.disconnect();
+        Athlete runner = new Runner();
+        Athlete jumper = new Jumper();
+        System.out.println("Тестируем бегуна");
+        runner.run();
+        runner.jump();
+        System.out.println("Тестируем прыгуна");
+        jumper.run();
+        jumper.jump();
+        Product laptop = new Electronics(1000, "Notebook");
+        Product tshirt = new Clothing(50, "tshirt");
+        System.out.println("Продукт :" + laptop.getName() + " Цена $" + laptop.getPrice());
+        System.out.println("Продукт :" + tshirt.getName() + " Цена $" + tshirt.getPrice());
+        Animals lion=new Lion();
+        Animals elephant=new Elephant();
+        System.out.println("Лев");
+        System.out.println(lion.eat());
+        System.out.println(lion.sleep());
+        ((SoundMaker)lion).makeSound();
+        System.out.println("Слон");
+        System.out.println(elephant.eat());
+        System.out.println(elephant.sleep());
+        ((SoundMaker)elephant).makeSound();
 
     }
 }
